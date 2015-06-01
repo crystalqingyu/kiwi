@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Qf4-tu-GdO">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+    </dependencies>
+    <scenes>
+        <!--macaca-->
+        <scene sceneID="ciz-O1-vLx">
+            <objects>
+                <tabBarController title="macaca" id="Qf4-tu-GdO" customClass="MaTabbarController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="aDD-CD-9Tl"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="xuV-as-tMv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="H1H-TA-uHl" kind="relationship" relationship="viewControllers" id="iVf-8E-8qm"/>
+                        <segue destination="86r-Py-VT3" kind="relationship" relationship="viewControllers" id="RKi-3p-bAh"/>
+                        <segue destination="DHe-8B-GOK" kind="relationship" relationship="viewControllers" id="eGi-NN-mBU"/>
+                        <segue destination="F6L-KL-NWS" kind="relationship" relationship="viewControllers" id="83F-iw-ObQ"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9S7-hb-Iqk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-616.79999999999995" y="-2188.2199999999993"/>
+        </scene>
+        <!--运动查询-->
+        <scene sceneID="jTv-Ud-7ga">
+            <objects>
+                <navigationController id="86r-Py-VT3" customClass="MaNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="1" title="运动查询" image="icon1.png" id="kkG-Fu-l5p">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-3"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="w2v-G0-G4J">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="5hx-Vg-8kh" kind="relationship" relationship="rootViewController" id="rx4-Jo-NI0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uxl-ef-njc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-80" y="-2188.9999999999995"/>
+        </scene>
+        <!--今天-->
+        <scene sceneID="ELB-9E-xH1">
+            <objects>
+                <tableViewController id="5hx-Vg-8kh" customClass="ActQueryViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0AD-qg-NYg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        <connections>
+                            <outlet property="dataSource" destination="5hx-Vg-8kh" id="bd8-19-xVl"/>
+                            <outlet property="delegate" destination="5hx-Vg-8kh" id="HhO-aU-UI5"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="今天" id="YQQ-II-tms">
+                        <barButtonItem key="backBarButtonItem" title="返回" id="tnk-AE-kGd"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="FSJ-Y4-Kxh">
+                            <color key="tintColor" red="0.8862745098" green="0.1647058824" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="deleteAct:" destination="5hx-Vg-8kh" id="yzw-bb-qwH"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="日期选择" id="Mke-GB-uw9">
+                            <connections>
+                                <action selector="chooseDate:" destination="5hx-Vg-8kh" id="bUk-VW-cx4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="deleteBtn" destination="FSJ-Y4-Kxh" id="WVc-i5-96v"/>
+                        <segue destination="gzw-qH-2Kg" kind="custom" identifier="GoToDateChoose" id="0jS-8K-rpI"/>
+                        <segue destination="S7v-TU-pFS" kind="custom" identifier="GoToActQueryEdit" id="kvJ-Bs-f2h"/>
+                        <segue destination="9rp-Nk-7zf" kind="push" identifier="ActQueryGoToActFull" id="elg-Db-fK3"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R6g-va-Wgf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="368" y="-2188.9999999999995"/>
+        </scene>
+        <!--运动统计-->
+        <scene sceneID="Blp-pp-Aas">
+            <objects>
+                <navigationController id="DHe-8B-GOK" customClass="MaNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="2" title="运动统计" image="icon2.png" id="xp0-Nb-qtD">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-3"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5Hj-d1-lWW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ezv-TR-7XD" kind="relationship" relationship="rootViewController" id="bha-EC-bIM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KjY-iR-J4I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-80" y="-1535.9999999999998"/>
+        </scene>
+        <!--Stat View Controller-->
+        <scene sceneID="laV-03-1fx">
+            <objects>
+                <viewController id="ezv-TR-7XD" customClass="StatViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CGh-TB-XTj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="fCZ-VN-7Jt">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="n9U-Ve-IMD">
+                            <rect key="frame" x="50" y="8" width="188" height="29"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                            <segments>
+                                <segment title="今天"/>
+                                <segment title="本周"/>
+                                <segment title="本月"/>
+                                <segment title="本年"/>
+                            </segments>
+                            <color key="tintColor" red="1" green="0.99215686274509807" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="segmentChanged:" destination="ezv-TR-7XD" eventType="valueChanged" id="8gY-ng-ESC"/>
+                            </connections>
+                        </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" title="选择日期" id="IOI-2g-Z9v">
+                            <connections>
+                                <action selector="doSelectDate:" destination="ezv-TR-7XD" id="Glb-j6-j7E"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="timeWindowSegment" destination="n9U-Ve-IMD" id="D2u-fD-p1M"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D6l-BD-luV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="368" y="-1536"/>
+        </scene>
+        <!--Guide View Controller-->
+        <scene sceneID="Uba-sw-Voa">
+            <objects>
+                <viewController storyboardIdentifier="guideViewController" wantsFullScreenLayout="YES" hidesBottomBarWhenPushed="YES" id="WvH-BN-xkQ" customClass="GuideViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fbf-2H-y8G">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="2F2-1o-oue">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="0.92156862750000001" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                            </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" id="zaY-Gl-7vF">
+                                <rect key="frame" x="120" y="360" width="80" height="37"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <color key="pageIndicatorTintColor" red="0.85882352939999995" green="0.97647058819999999" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </pageControl>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DZg-ET-F00">
+                                <rect key="frame" x="0.0" y="440" width="320" height="30"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.85882352939999995" green="0.97647058819999999" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <state key="normal" title="开启猕猴桃">
+                                    <color key="titleColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Qf4-tu-GdO" kind="modal" modalPresentationStyle="fullScreen" id="QUN-Jj-09J"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="jCk-B5-HSb"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="guideScrollView" destination="2F2-1o-oue" id="8pP-Wl-qKi"/>
+                        <outlet property="pageControl" destination="zaY-Gl-7vF" id="OkB-xu-pc9"/>
+                        <outlet property="startBtn" destination="DZg-ET-F00" id="agK-Oq-YQM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2N8-8l-b7m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-617" y="-2818"/>
+        </scene>
+        <!--运动记录-->
+        <scene sceneID="CGF-Tr-FgJ">
+            <objects>
+                <navigationController id="H1H-TA-uHl" customClass="MaNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="运动记录" image="icon0.png" id="nG1-N5-LKf">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-3"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YR4-up-QUa">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="qTP-KW-9rU" kind="relationship" relationship="rootViewController" id="dcQ-gl-gJU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J7m-Hh-zig" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-80" y="-2817.9999999999995"/>
+        </scene>
+        <!--设置-->
+        <scene sceneID="AoJ-lS-Kq4">
+            <objects>
+                <tableViewController id="Spl-8C-kGj" customClass="SettingViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Wwh-sM-wAY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexTrackingBackgroundColor" red="1" green="0.92156862750000001" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="Spl-8C-kGj" id="EiC-3T-hQD"/>
+                            <outlet property="delegate" destination="Spl-8C-kGj" id="09M-hW-bTQ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="设置" id="sJg-X3-mtR"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v5A-w5-3UA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="368" y="-895"/>
+        </scene>
+        <!--……-->
+        <scene sceneID="1Fm-YH-9U1">
+            <objects>
+                <navigationController id="F6L-KL-NWS" customClass="MaNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="3" title="……" image="icon3.png" id="cNX-S2-xzW">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-3"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OEC-O0-jTn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Spl-8C-kGj" kind="relationship" relationship="rootViewController" id="DfL-na-HPo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DJb-jW-or0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-74" y="-895"/>
+        </scene>
+        <!--运动记录-->
+        <scene sceneID="WLK-XV-gwj">
+            <objects>
+                <collectionViewController id="qTP-KW-9rU" customClass="ActRecordViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="4ao-hG-Dfl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="tzk-ph-Ocg">
+                            <size key="itemSize" width="106" height="106"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="20" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="qTP-KW-9rU" id="41h-Yp-PZW"/>
+                            <outlet property="delegate" destination="qTP-KW-9rU" id="Fhg-VT-wzc"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="运动记录" id="dxF-8d-r09">
+                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="eog-wU-EJS">
+                            <connections>
+                                <action selector="jumpToShare:" destination="qTP-KW-9rU" id="xT6-LY-Y20"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="KrR-pb-cLi">
+                            <color key="tintColor" red="0.88627450980392153" green="0.16470588235294117" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="jumpToActFull" destination="qTP-KW-9rU" id="FDG-hY-oH0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="9rp-Nk-7zf" kind="custom" identifier="JumpToActFullViewController" id="NkB-Xo-ZN0"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0b4-zz-SMb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="376" y="-2817.9999999999995"/>
+        </scene>
+        <!--运动-->
+        <scene sceneID="O7p-wc-iqL">
+            <objects>
+                <tableViewController hidesBottomBarWhenPushed="YES" id="9rp-Nk-7zf" customClass="ActFullViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="2L2-ab-oPW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="搜索全部运动" id="1bD-Y9-1yw">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="9rp-Nk-7zf" id="QTI-x1-bdb"/>
+                            </connections>
+                        </searchBar>
+                        <connections>
+                            <outlet property="dataSource" destination="9rp-Nk-7zf" id="6vF-VE-iFJ"/>
+                            <outlet property="delegate" destination="9rp-Nk-7zf" id="olB-c2-98b"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="运动" id="i8Z-In-F2U">
+                        <barButtonItem key="backBarButtonItem" title="运动" id="Mm2-Pj-PWa"/>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="actSearchBar" destination="1bD-Y9-1yw" id="A62-Nk-XGv"/>
+                        <outlet property="searchDisplayController" destination="DAW-XG-MQG" id="y0M-fp-o4o"/>
+                        <segue destination="Oz9-8y-crr" kind="push" identifier="JumpToActFullSort" id="YIZ-OF-Uup"/>
+                        <segue destination="494-c7-3JI" kind="custom" identifier="ActFullGoToActQueryAdd" id="o80-OW-1Xm"/>
+                        <segue destination="5KP-yg-cXc" kind="custom" identifier="ActFullGoToActSetting" id="FUw-B6-PkS"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aXA-gU-3ga" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController searchResultsTitle="" id="DAW-XG-MQG">
+                    <connections>
+                        <outlet property="delegate" destination="9rp-Nk-7zf" id="r7n-SY-uOr"/>
+                        <outlet property="searchBar" destination="1bD-Y9-1yw" id="cEv-Dk-cIc"/>
+                        <outlet property="searchContentsController" destination="9rp-Nk-7zf" id="1Jp-TO-PHc"/>
+                        <outlet property="searchResultsDataSource" destination="9rp-Nk-7zf" id="yjM-Pg-5bm"/>
+                        <outlet property="searchResultsDelegate" destination="9rp-Nk-7zf" id="8EG-d4-Dd9"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="942" y="-2817.9999999999995"/>
+        </scene>
+        <!--Act Full Sort View Controller-->
+        <scene sceneID="Tn8-ko-byR">
+            <objects>
+                <tableViewController hidesBottomBarWhenPushed="YES" id="Oz9-8y-crr" customClass="ActFullSortViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="0XI-Pm-cOQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="TPD-eg-GWh">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="Oz9-8y-crr" id="WPp-U4-bp2"/>
+                            </connections>
+                        </searchBar>
+                        <connections>
+                            <outlet property="dataSource" destination="Oz9-8y-crr" id="tIS-FP-Fft"/>
+                            <outlet property="delegate" destination="Oz9-8y-crr" id="vLb-bb-Zoj"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="uwx-g6-w55"/>
+                    <connections>
+                        <outlet property="actSearchBar" destination="TPD-eg-GWh" id="itK-vF-4ix"/>
+                        <outlet property="searchDisplayController" destination="haI-pa-wjr" id="1pq-OD-EOo"/>
+                        <segue destination="5KP-yg-cXc" kind="custom" identifier="ActFullSortGoToActSetting" id="snv-rQ-eHz"/>
+                        <segue destination="494-c7-3JI" kind="custom" identifier="ActFullSortGoToActQueryAdd" id="6Eb-h2-tHa"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0ct-nT-JIU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="haI-pa-wjr">
+                    <connections>
+                        <outlet property="delegate" destination="Oz9-8y-crr" id="6B4-88-kS5"/>
+                        <outlet property="searchBar" destination="TPD-eg-GWh" id="kEC-Ov-SKr"/>
+                        <outlet property="searchContentsController" destination="Oz9-8y-crr" id="sWS-rV-tny"/>
+                        <outlet property="searchResultsDataSource" destination="Oz9-8y-crr" id="e1i-zV-G4C"/>
+                        <outlet property="searchResultsDelegate" destination="Oz9-8y-crr" id="jYZ-Y8-Imy"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="1435" y="-2817.9999999999995"/>
+        </scene>
+        <!--Date Choose View Controller-->
+        <scene sceneID="uYV-qA-Qs3">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="gzw-qH-2Kg" customClass="DateChooseViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AgO-dC-PQp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="ccg-e2-y0A">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" id="7Qu-CU-ik6">
+                                        <rect key="frame" x="0.0" y="110" width="320" height="186"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="440591743.56556398">
+                                            <!--2014-12-18 10:35:43 +0000-->
+                                        </date>
+                                        <connections>
+                                            <action selector="clickPicker:" destination="gzw-qH-2Kg" eventType="valueChanged" id="0iV-JH-zVy"/>
+                                        </connections>
+                                    </datePicker>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hQ6-jd-Dal">
+                                        <rect key="frame" x="8" y="373" width="304" height="72"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <state key="normal" title="确定">
+                                            <color key="titleColor" red="0.043137254901960784" green="0.16862745098039217" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="submit:" destination="gzw-qH-2Kg" eventType="touchUpInside" id="Ihq-VV-360"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Kuy-do-r4x">
+                                        <rect key="frame" x="111" y="304" width="98" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.95686274510000002" green="0.76470588240000004" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="选择今天">
+                                            <color key="titleColor" red="0.58431372550000005" green="0.73725490199999999" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="disabled">
+                                            <color key="titleColor" red="1" green="0.99215686270000003" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="pickToday:" destination="gzw-qH-2Kg" eventType="touchUpInside" id="nag-7w-OBy"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="uy2-a7-hUV"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="datePicker" destination="7Qu-CU-ik6" id="h8n-mc-PBy"/>
+                        <outlet property="insideView" destination="ccg-e2-y0A" id="l6H-Mn-e08"/>
+                        <outlet property="todayBtn" destination="Kuy-do-r4x" id="afs-b4-Bx7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KQf-kP-Cqx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="942" y="-2189"/>
+        </scene>
+        <!--Act Query Add View Controller-->
+        <scene sceneID="Tdr-i7-5IY">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="494-c7-3JI" customClass="ActQueryAddViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ieo-SE-DDp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="gZt-xs-DC2">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" id="f7z-D4-PKK">
+                                        <rect key="frame" x="0.0" y="157" width="320" height="254"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" id="Qzw-jH-jrA">
+                                                <rect key="frame" x="0.0" y="29" width="160" height="161"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <date key="date" timeIntervalSinceReferenceDate="443091275.569736">
+                                                    <!--2015-01-16 08:54:35 +0000-->
+                                                </date>
+                                                <connections>
+                                                    <action selector="clickFirstTime:" destination="S7v-TU-pFS" eventType="valueChanged" id="QDK-eJ-pS6"/>
+                                                </connections>
+                                            </datePicker>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开始时间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HKE-59-Log">
+                                                <rect key="frame" x="48" y="1" width="68" height="20"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.8862745098" green="0.1647058824" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" id="s1Y-QK-YqW">
+                                                <rect key="frame" x="160" y="29" width="160" height="161"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <date key="date" timeIntervalSinceReferenceDate="443091258.85966599">
+                                                    <!--2015-01-16 08:54:18 +0000-->
+                                                </date>
+                                            </datePicker>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="结束时间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OKH-8H-B9T">
+                                                <rect key="frame" x="206" y="0.0" width="68" height="20"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.8862745098" green="0.1647058824" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="还没有选择时间！" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kCJ-lE-He0">
+                                                <rect key="frame" x="0.0" y="208" width="320" height="46"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.80784313730000001" green="0.99215686270000003" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.95686274510000002" green="0.76470588240000004" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名称" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dlO-aw-EBF">
+                                        <rect key="frame" x="154" y="81" width="147" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="chg-aa-xQw">
+                                        <rect key="frame" x="57" y="81" width="68" height="68"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZO4-cF-fMk">
+                                        <rect key="frame" x="123" y="419" width="75" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <state key="normal" title="添加记录">
+                                            <color key="titleColor" red="0.58431372550000005" green="0.73725490199999999" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="disabled">
+                                            <color key="titleColor" red="1" green="0.99215686270000003" blue="0.77647058820000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="submitTime" destination="S7v-TU-pFS" eventType="touchUpInside" id="6rA-qh-qkl"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="卡路里" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4Jy-eg-gRx">
+                                        <rect key="frame" x="154" y="119" width="147" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="c6F-tJ-UqA"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="btnSubmit" destination="ZO4-cF-fMk" id="LKX-MC-jOz"/>
+                        <outlet property="imageView" destination="chg-aa-xQw" id="XV5-cV-KEr"/>
+                        <outlet property="insideView" destination="gZt-xs-DC2" id="1dh-vD-tMM"/>
+                        <outlet property="labelCalorie" destination="4Jy-eg-gRx" id="7OH-Et-xQg"/>
+                        <outlet property="labelName" destination="dlO-aw-EBF" id="mp5-kU-ZZr"/>
+                        <outlet property="labelPeriod" destination="kCJ-lE-He0" id="7lN-Fy-sss"/>
+                        <outlet property="pickerEnd" destination="s1Y-QK-YqW" id="5iB-4o-3e3"/>
+                        <outlet property="pickerFirst" destination="Qzw-jH-jrA" id="08d-Td-1nu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l05-16-Tys" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1435" y="-2189"/>
+        </scene>
+        <!--Act Setting View Controller-->
+        <scene sceneID="q7f-bg-8r5">
+            <objects>
+                <viewController id="5KP-yg-cXc" customClass="ActSettingViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rtP-Cc-kf5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="i1e-7g-2yO">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="运动名称" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ILb-FQ-Kvl">
+                                        <rect key="frame" x="144" y="141" width="161" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="卡路里" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IRP-W3-3eQ">
+                                        <rect key="frame" x="144" y="103" width="160" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="在首页显示" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yZg-4c-Ola">
+                                        <rect key="frame" x="53" y="250" width="107" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <color key="textColor" red="0.8862745098" green="0.1647058824" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="1uF-ab-iQb">
+                                        <rect key="frame" x="218" y="245" width="51" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    </switch>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="lLB-9D-Kyy">
+                                        <rect key="frame" x="53" y="95" width="82" height="82"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="52m-mG-TBi"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="imageView" destination="lLB-9D-Kyy" id="o2K-KH-N8P"/>
+                        <outlet property="insideView" destination="i1e-7g-2yO" id="bd5-hI-NyZ"/>
+                        <outlet property="labelCalorie" destination="IRP-W3-3eQ" id="W3V-mA-8Lq"/>
+                        <outlet property="labelName" destination="ILb-FQ-Kvl" id="UTd-yZ-wW9"/>
+                        <outlet property="switchFirstPage" destination="1uF-ab-iQb" id="X9w-b9-JTt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wNd-Jd-8uT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1435" y="-3401"/>
+        </scene>
+        <!--Act Query Edit View Controller-->
+        <scene sceneID="BUZ-Db-wD3">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="S7v-TU-pFS" customClass="ActQueryEditViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rZ6-kI-5CV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="b3a-8R-JoS">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" id="NIQ-hg-j4u">
+                                        <rect key="frame" x="0.0" y="105" width="320" height="271"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开始时间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WBW-oU-43M">
+                                                <rect key="frame" x="61" y="0.0" width="68" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.8862745098" green="0.1647058824" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="结束时间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4xP-oB-fTX">
+                                                <rect key="frame" x="200" y="0.0" width="68" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.8862745098" green="0.1647058824" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" useCurrentDate="NO" id="3hV-IM-lxC">
+                                                <rect key="frame" x="0.0" y="48" width="160" height="180"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <date key="date" timeIntervalSinceReferenceDate="443091275.569736">
+                                                    <!--2015-01-16 08:54:35 +0000-->
+                                                </date>
+                                                <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
+                                                    <!--1970-01-01 11:00:00 +0000-->
+                                                </date>
+                                                <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
+                                                    <!--2037-12-31 11:00:00 +0000-->
+                                                </date>
+                                                <connections>
+                                                    <action selector="clickFirstTime:" destination="S7v-TU-pFS" eventType="valueChanged" id="Hgq-S3-eCV"/>
+                                                </connections>
+                                            </datePicker>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Qbe-8k-bWJ">
+                                                <rect key="frame" x="93" y="241" width="134" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <state key="normal" title="确定">
+                                                    <color key="titleColor" red="0.1176470588" green="0.33725490200000002" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="submitTime" destination="S7v-TU-pFS" eventType="touchUpInside" id="ggd-xn-Yve"/>
+                                                </connections>
+                                            </button>
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" useCurrentDate="NO" id="urk-Zu-07k">
+                                                <rect key="frame" x="160" y="48" width="160" height="180"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <date key="date" timeIntervalSinceReferenceDate="443091258.85966599">
+                                                    <!--2015-01-16 08:54:18 +0000-->
+                                                </date>
+                                                <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
+                                                    <!--1970-01-01 11:00:00 +0000-->
+                                                </date>
+                                                <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
+                                                    <!--2037-12-31 11:00:00 +0000-->
+                                                </date>
+                                            </datePicker>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.95686274510000002" green="0.76470588240000004" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="调整时间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aWE-g2-PSv">
+                                        <rect key="frame" x="126" y="70" width="68" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="空闲时间：" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Z4-gW-jDI">
+                                        <rect key="frame" x="0.0" y="374" width="320" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.80784313725490198" green="0.99215686274509807" blue="0.99215686274509807" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Znj-Fs-zHK">
+                                        <rect key="frame" x="115" y="428" width="90" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="删除此条记录">
+                                            <color key="titleColor" red="0.58431372550000005" green="0.73725490199999999" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="deleteRecord" destination="S7v-TU-pFS" eventType="touchUpInside" id="all-sf-At8"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="endTime" destination="urk-Zu-07k" id="Dbb-cC-FoR"/>
+                        <outlet property="firstTime" destination="3hV-IM-lxC" id="nD9-Xz-DU0"/>
+                        <outlet property="insideView" destination="b3a-8R-JoS" id="aU0-AL-7I1"/>
+                        <outlet property="labelIdle" destination="6Z4-gW-jDI" id="tem-M6-rr7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YxX-w3-HqI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="934" y="-1536"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icon0.png" width="23" height="23"/>
+        <image name="icon1.png" width="30" height="18"/>
+        <image name="icon2.png" width="24" height="24"/>
+        <image name="icon3.png" width="24" height="24"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="o80-OW-1Xm"/>
+        <segue reference="NkB-Xo-ZN0"/>
+        <segue reference="FUw-B6-PkS"/>
+    </inferredMetricsTieBreakers>
+</document>

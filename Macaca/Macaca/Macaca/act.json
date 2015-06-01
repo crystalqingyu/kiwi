@@ -1,0 +1,74 @@
+[
+  {
+    "count": "0", 
+    "calorie": "255", 
+    "icon": "zoulu.png", 
+    "title": "走路(快)"
+  },  
+  {
+    "count": "0", 
+    "calorie": "455", 
+    "icon": "louti.png", 
+    "title": "上楼梯"
+  }, 
+  {
+    "count": "0", 
+    "calorie": "446", 
+    "icon": "paobu.png", 
+    "title": "原地慢跑"
+  }, 
+  {
+    "count": "0", 
+    "calorie": "337", 
+    "icon": "zhengduoyan1.png", 
+    "title": "郑多燕1(小红帽)"
+  }, 
+  {
+    "count": "0", 
+    "calorie": "96", 
+    "icon": "yujia.png", 
+    "title": "瑜伽(低强度)"
+  }, 
+  {
+    "count": "0", 
+    "calorie": "446", 
+    "icon": "plank.png", 
+    "title": "平板支撑(plank)"
+  }, 
+  {
+    "count": "0", 
+    "calorie": "715", 
+    "icon": "tiaosheng.png", 
+    "title": "跳绳(快速)"
+  }, 
+  {
+    "count": "0", 
+    "calorie": "84", 
+    "icon": "xiwan.png", 
+    "title": "洗碗"
+  }, 
+  {
+    "count": "0", 
+    "calorie": "130", 
+    "icon": "dasao.png", 
+    "title": "打扫房间"
+  }, 
+  {
+    "count": "0", 
+    "calorie": "162", 
+    "icon": "jiawu.png", 
+    "title": "家务劳动(中强度)"
+  }, 
+  {
+    "count": "0", 
+    "calorie": "65", 
+    "icon": "linyu.png", 
+    "title": "淋浴"
+  }, 
+  {
+    "count": "0", 
+    "calorie": "65", 
+    "icon": "zhanzhe.png", 
+    "title": "站着"
+  }
+]
