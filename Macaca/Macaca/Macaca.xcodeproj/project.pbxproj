@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C98AED71B2585DD00B3391D /* LXReorderableCollectionViewFlowLayout in Resources */ = {isa = PBXBuildFile; fileRef = 3C98AED61B2585DD00B3391D /* LXReorderableCollectionViewFlowLayout */; };
 		E306C8D81AC2BF03005AF950 /* pingfen.png in Resources */ = {isa = PBXBuildFile; fileRef = E306C8D71AC2BF03005AF950 /* pingfen.png */; };
 		E306C8DA1AC2BF7E005AF950 /* contact.png in Resources */ = {isa = PBXBuildFile; fileRef = E306C8D91AC2BF7E005AF950 /* contact.png */; };
 		E306C9291AC41C06005AF950 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E306C9271AC41C06005AF950 /* ShareViewController.m */; };
@@ -235,6 +236,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3C98AED61B2585DD00B3391D /* LXReorderableCollectionViewFlowLayout */ = {isa = PBXFileReference; lastKnownFileType = folder; path = LXReorderableCollectionViewFlowLayout; sourceTree = "<group>"; };
 		E306C8D71AC2BF03005AF950 /* pingfen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pingfen.png; sourceTree = "<group>"; };
 		E306C8D91AC2BF7E005AF950 /* contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contact.png; sourceTree = "<group>"; };
 		E306C9261AC41C06005AF950 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
@@ -976,6 +978,7 @@
 		E3E6D6121A36A49F0061931F /* Macaca */ = {
 			isa = PBXGroup;
 			children = (
+				3C98AED61B2585DD00B3391D /* LXReorderableCollectionViewFlowLayout */,
 				E30EC97D1ACD505E00CCEFDB /* ShareContents */,
 				E3E6D63C1A36ACAD0061931F /* Classes */,
 				E3E6D6171A36A49F0061931F /* AppDelegate.h */,
@@ -1414,6 +1417,7 @@
 				E3B07F0E1AA18FAB00C8E276 /* huachuan.png in Resources */,
 				E3B07F241AA18FAB00C8E276 /* pingpangqiu.png in Resources */,
 				E3B07E911AA189FA00C8E276 /* Icon-60@2x.png in Resources */,
+				3C98AED71B2585DD00B3391D /* LXReorderableCollectionViewFlowLayout in Resources */,
 				E3E6D6661A39A3BF0061931F /* fastwalk.jpg in Resources */,
 				E3B07F061AA18FAB00C8E276 /* dasao.png in Resources */,
 				E3B07F091AA18FAB00C8E276 /* fuqian.png in Resources */,
