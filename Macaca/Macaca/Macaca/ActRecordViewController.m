@@ -14,10 +14,11 @@
 #import "AppDelegate.h"
 #import "ActDataFile.h"
 #import "ShareViewController.h"
+#import "LXReorderableCollectionViewFlowLayout.h"
 
 #define changeBorder 2.0
 
-@interface ActRecordViewController ()<AppDelegeteWillTerminateDelegate>
+@interface ActRecordViewController ()<AppDelegeteWillTerminateDelegate,LXReorderableCollectionViewDataSource,LXReorderableCollectionViewDelegateFlowLayout>
 
 @end
 
@@ -62,7 +63,7 @@ static NSString * const reuseIdentifier = @"ActRecordCell";
     UINib* nib = [UINib nibWithNibName:@"ActRecordCell" bundle:nil];
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:reuseIdentifier];
     // 重新排布collectionView的layout
-    UICollectionViewFlowLayout* layout = [[UICollectionViewFlowLayout alloc] init];
+    LXReorderableCollectionViewFlowLayout* layout = [[LXReorderableCollectionViewFlowLayout alloc] init];
     layout.itemSize = CGSizeMake(self.view.frame.size.width/3, self.view.frame.size.width/3);
     layout.minimumInteritemSpacing = 0;
     layout.minimumLineSpacing = 0;
@@ -83,6 +84,8 @@ static NSString * const reuseIdentifier = @"ActRecordCell";
             _btnSound = nil;
         }
     }
+//    // 添加LXReorderableCollectionViewLayout
+//    LXReorderableCollectionViewFlowLayout* reorderLayout = [[LXReorderableCollectionViewFlowLayout alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -483,6 +486,30 @@ static NSString * const reuseIdentifier = @"ActRecordCell";
     }
     double y = 255/(1+254.0*exp(-0.5*calorie));
     self.cancelButton.backgroundColor = [UIColor colorWithRed:y/255.0 green:195.0/255 blue:150.0/255 alpha:0.98];
+}
+
+#pragma mark - LXReorderableCollectionViewDataSource methods
+
+- (void)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath willMoveToIndexPath:(NSIndexPath *)toIndexPath {
+    ActRecordCellItem *item = self.data[fromIndexPath.item];
+    
+    [self.data removeObjectAtIndex:fromIndexPath.item];
+    [self.data insertObject:item atIndex:toIndexPath.item];
+    // 归档
+      // 生成需要打开的json文件路径
+    NSString* home = NSHomeDirectory(); // 路径
+    NSString* docPath = [home stringByAppendingPathComponent:@"Documents"];
+    NSString* filePath = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"act.json"]];
+      // 交换位置
+    NSData* data = [NSData dataWithContentsOfFile:filePath];
+    NSArray* array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    NSMutableArray* mutableArray = [NSMutableArray arrayWithArray:array];
+    [mutableArray removeObjectAtIndex:fromIndexPath.row];
+    NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:item.title,@"title",item.icon,@"icon",item.calorie,@"calorie", nil];
+    [mutableArray insertObject:dict atIndex:toIndexPath.row];
+      // 写文件
+    data = [NSJSONSerialization dataWithJSONObject:mutableArray options:NSJSONWritingPrettyPrinted error:nil];
+    [data writeToFile:filePath atomically:YES];
 }
 
 @end

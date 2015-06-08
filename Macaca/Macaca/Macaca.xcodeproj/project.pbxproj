@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3C98AED71B2585DD00B3391D /* LXReorderableCollectionViewFlowLayout in Resources */ = {isa = PBXBuildFile; fileRef = 3C98AED61B2585DD00B3391D /* LXReorderableCollectionViewFlowLayout */; };
+		3C98AED91B25A02D00B3391D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C98AED81B25A02D00B3391D /* QuartzCore.framework */; };
+		3C98AEDB1B25A77A00B3391D /* SelectDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E30EC9AB1AD45ABC00CCEFDB /* SelectDateViewController.m */; };
+		3C98AEDE1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C98AEDD1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.m */; };
 		E306C8D81AC2BF03005AF950 /* pingfen.png in Resources */ = {isa = PBXBuildFile; fileRef = E306C8D71AC2BF03005AF950 /* pingfen.png */; };
 		E306C8DA1AC2BF7E005AF950 /* contact.png in Resources */ = {isa = PBXBuildFile; fileRef = E306C8D91AC2BF7E005AF950 /* contact.png */; };
 		E306C9291AC41C06005AF950 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E306C9271AC41C06005AF950 /* ShareViewController.m */; };
@@ -35,7 +37,6 @@
 		E30EC99F1AD3DEDB00CCEFDB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E30EC99E1AD3DEDB00CCEFDB /* libsqlite3.dylib */; };
 		E30EC9A11AD3DEEB00CCEFDB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E30EC9A01AD3DEEB00CCEFDB /* CoreTelephony.framework */; };
 		E30EC9A31AD3DEFB00CCEFDB /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E30EC9A21AD3DEFB00CCEFDB /* libstdc++.dylib */; };
-		E30EC9AD1AD45ABC00CCEFDB /* SelectDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E30EC9AB1AD45ABC00CCEFDB /* SelectDateViewController.m */; };
 		E30EC9AE1AD45ABC00CCEFDB /* SelectDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E30EC9AC1AD45ABC00CCEFDB /* SelectDateViewController.xib */; };
 		E33091311A8BB46000BFEB23 /* header-image-kiwi.png in Resources */ = {isa = PBXBuildFile; fileRef = E33091301A8BB46000BFEB23 /* header-image-kiwi.png */; };
 		E33091371A8BB78A00BFEB23 /* demo0.png in Resources */ = {isa = PBXBuildFile; fileRef = E33091331A8BB78A00BFEB23 /* demo0.png */; };
@@ -236,7 +237,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3C98AED61B2585DD00B3391D /* LXReorderableCollectionViewFlowLayout */ = {isa = PBXFileReference; lastKnownFileType = folder; path = LXReorderableCollectionViewFlowLayout; sourceTree = "<group>"; };
+		3C98AED81B25A02D00B3391D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		3C98AEDC1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXReorderableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		3C98AEDD1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXReorderableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		E306C8D71AC2BF03005AF950 /* pingfen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pingfen.png; sourceTree = "<group>"; };
 		E306C8D91AC2BF7E005AF950 /* contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contact.png; sourceTree = "<group>"; };
 		E306C9261AC41C06005AF950 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
@@ -592,6 +595,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C98AED91B25A02D00B3391D /* QuartzCore.framework in Frameworks */,
 				E30EC9A31AD3DEFB00CCEFDB /* libstdc++.dylib in Frameworks */,
 				E30EC9A11AD3DEEB00CCEFDB /* CoreTelephony.framework in Frameworks */,
 				E30EC99F1AD3DEDB00CCEFDB /* libsqlite3.dylib in Frameworks */,
@@ -774,6 +778,7 @@
 		E39979CB1AC9AB24004D3B96 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3C98AED81B25A02D00B3391D /* QuartzCore.framework */,
 				E30EC9A21AD3DEFB00CCEFDB /* libstdc++.dylib */,
 				E30EC9A01AD3DEEB00CCEFDB /* CoreTelephony.framework */,
 				E30EC99E1AD3DEDB00CCEFDB /* libsqlite3.dylib */,
@@ -978,7 +983,8 @@
 		E3E6D6121A36A49F0061931F /* Macaca */ = {
 			isa = PBXGroup;
 			children = (
-				3C98AED61B2585DD00B3391D /* LXReorderableCollectionViewFlowLayout */,
+				3C98AEDC1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.h */,
+				3C98AEDD1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.m */,
 				E30EC97D1ACD505E00CCEFDB /* ShareContents */,
 				E3E6D63C1A36ACAD0061931F /* Classes */,
 				E3E6D6171A36A49F0061931F /* AppDelegate.h */,
@@ -1417,7 +1423,6 @@
 				E3B07F0E1AA18FAB00C8E276 /* huachuan.png in Resources */,
 				E3B07F241AA18FAB00C8E276 /* pingpangqiu.png in Resources */,
 				E3B07E911AA189FA00C8E276 /* Icon-60@2x.png in Resources */,
-				3C98AED71B2585DD00B3391D /* LXReorderableCollectionViewFlowLayout in Resources */,
 				E3E6D6661A39A3BF0061931F /* fastwalk.jpg in Resources */,
 				E3B07F061AA18FAB00C8E276 /* dasao.png in Resources */,
 				E3B07F091AA18FAB00C8E276 /* fuqian.png in Resources */,
@@ -1581,7 +1586,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E30EC9AD1AD45ABC00CCEFDB /* SelectDateViewController.m in Sources */,
+				3C98AEDB1B25A77A00B3391D /* SelectDateViewController.m in Sources */,
 				E363AECC1A4D6A1C00E74021 /* ActQueryViewCell.m in Sources */,
 				E3CE8FB91A3AE7430043B511 /* SettingBaseViewController.m in Sources */,
 				E362570E1A6276E20097464C /* ActSettingViewController.m in Sources */,
@@ -1613,6 +1618,7 @@
 				E37FC8541A413B5B00FCCEE5 /* ActQueryViewController.m in Sources */,
 				E3E6D6461A36AF1D0061931F /* ActRecordViewController.m in Sources */,
 				E3E6D6511A36B2150061931F /* TestViewController.m in Sources */,
+				3C98AEDE1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.m in Sources */,
 				E3CE8FB31A3AC1F50043B511 /* SettingItem.m in Sources */,
 				E3E837B41A80E64B002B6B40 /* StatViewController.m in Sources */,
 				E352C9361A8A0856003DC72C /* GuideViewController.m in Sources */,
