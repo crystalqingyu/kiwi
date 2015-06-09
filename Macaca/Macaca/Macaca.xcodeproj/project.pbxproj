@@ -627,6 +627,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C9CDEDB1B26DCA60046F3DD /* SDK */ = {
+			isa = PBXGroup;
+			children = (
+				3C98AEDC1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.h */,
+				3C98AEDD1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.m */,
+			);
+			name = SDK;
+			sourceTree = "<group>";
+		};
 		E30E925B1A5247A900E7C75D /* TabbarIcons */ = {
 			isa = PBXGroup;
 			children = (
@@ -983,8 +992,7 @@
 		E3E6D6121A36A49F0061931F /* Macaca */ = {
 			isa = PBXGroup;
 			children = (
-				3C98AEDC1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.h */,
-				3C98AEDD1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.m */,
+				3C9CDEDB1B26DCA60046F3DD /* SDK */,
 				E30EC97D1ACD505E00CCEFDB /* ShareContents */,
 				E3E6D63C1A36ACAD0061931F /* Classes */,
 				E3E6D6171A36A49F0061931F /* AppDelegate.h */,
