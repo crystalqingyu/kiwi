@@ -15,6 +15,8 @@
 
 @property (nonatomic, strong) NSDictionary* actRecord; // 单条运动记录
 
+- (NSString*)getFilePath;
+
 - (void)addWithActRecord; // 增加单条记录
 
 - (void)saveWithActData; // 保存某一天的记录
@@ -22,5 +24,7 @@
 - (void)changeWithFirstTimeStr: (NSString*)firstTimeStr endTimeStr: (NSString*)endTimeStr indexNo: (int)index; // 修改单条记录的起始时间
 
 - (void)removeWithIndexNo: (int)index; // 删除单条记录
+
+- (NSString*)copyFileWithNewType: (NSString*)newType;
 
 @end

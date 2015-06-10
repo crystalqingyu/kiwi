@@ -10,6 +10,7 @@
 		3C98AED91B25A02D00B3391D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C98AED81B25A02D00B3391D /* QuartzCore.framework */; };
 		3C98AEDB1B25A77A00B3391D /* SelectDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E30EC9AB1AD45ABC00CCEFDB /* SelectDateViewController.m */; };
 		3C98AEDE1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C98AEDD1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.m */; };
+		3C9CDF131B2828DA0046F3DD /* UploadFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9CDF121B2828DA0046F3DD /* UploadFile.m */; };
 		E306C8D81AC2BF03005AF950 /* pingfen.png in Resources */ = {isa = PBXBuildFile; fileRef = E306C8D71AC2BF03005AF950 /* pingfen.png */; };
 		E306C8DA1AC2BF7E005AF950 /* contact.png in Resources */ = {isa = PBXBuildFile; fileRef = E306C8D91AC2BF7E005AF950 /* contact.png */; };
 		E306C9291AC41C06005AF950 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E306C9271AC41C06005AF950 /* ShareViewController.m */; };
@@ -240,6 +241,8 @@
 		3C98AED81B25A02D00B3391D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3C98AEDC1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXReorderableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		3C98AEDD1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXReorderableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		3C9CDF111B2828DA0046F3DD /* UploadFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadFile.h; sourceTree = "<group>"; };
+		3C9CDF121B2828DA0046F3DD /* UploadFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadFile.m; sourceTree = "<group>"; };
 		E306C8D71AC2BF03005AF950 /* pingfen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pingfen.png; sourceTree = "<group>"; };
 		E306C8D91AC2BF7E005AF950 /* contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contact.png; sourceTree = "<group>"; };
 		E306C9261AC41C06005AF950 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
@@ -780,6 +783,8 @@
 				E352C9351A8A0856003DC72C /* GuideViewController.m */,
 				E3AE26421AB838A900F35BB7 /* ActDataFile.h */,
 				E3AE26431AB838A900F35BB7 /* ActDataFile.m */,
+				3C9CDF111B2828DA0046F3DD /* UploadFile.h */,
+				3C9CDF121B2828DA0046F3DD /* UploadFile.m */,
 			);
 			name = Others;
 			sourceTree = "<group>";
@@ -1595,6 +1600,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C98AEDB1B25A77A00B3391D /* SelectDateViewController.m in Sources */,
+				3C9CDF131B2828DA0046F3DD /* UploadFile.m in Sources */,
 				E363AECC1A4D6A1C00E74021 /* ActQueryViewCell.m in Sources */,
 				E3CE8FB91A3AE7430043B511 /* SettingBaseViewController.m in Sources */,
 				E362570E1A6276E20097464C /* ActSettingViewController.m in Sources */,

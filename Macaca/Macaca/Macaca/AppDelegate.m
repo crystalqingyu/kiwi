@@ -11,6 +11,8 @@
 #import "MaNavigationController.h"
 #import "ShareViewController.h"
 #import "TimeIntervalStat.h"
+#import "UploadFile.h"
+#import "ActDataFile.h"
 
 @interface AppDelegate () <shareByWeixinDelegate,shareByWeiboDelegate,shareByQQKongjianDelegate>
 
@@ -103,7 +105,18 @@
         //        self.window.rootViewController = [[MainController alloc] init];
                 NSLog(@"不是第一次使用新版本");
                 NSLog(@"gender--%@,birthdate--%@,height--%@,weight--%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"gender"],[[NSUserDefaults standardUserDefaults] objectForKey:@"birthdate"],[[NSUserDefaults standardUserDefaults] objectForKey:@"height"],[[NSUserDefaults standardUserDefaults] objectForKey:@"weight"]);
-
+        // 上传更新的plist文件
+        UploadFile *upload = [[UploadFile alloc] init];
+        
+        NSString *urlString = @"http://127.0.0.1/index.php";
+        
+        ActDataFile* file = [[ActDataFile alloc] init];
+        file.dateStr = @"2015-06-10";
+        NSString* path = [file copyFileWithNewType:@"txt"];        
+        
+        NSData *data = [NSData dataWithContentsOfFile:path];
+        
+        [upload uploadFileWithURL:[NSURL URLWithString:urlString] data:data];
         
     }
     return YES;

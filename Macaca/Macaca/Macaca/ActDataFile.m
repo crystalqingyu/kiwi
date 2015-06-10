@@ -85,4 +85,16 @@
     [dict writeToFile:filePath atomically:YES];
 }
 
+- (NSString*)copyFileWithNewType:(NSString *)newType {
+    // 路径
+    NSString* filePath = [self getFilePath];
+    // 读取文件
+    NSFileManager* defaultManager = [[NSFileManager alloc] init];
+    NSData* data = [defaultManager contentsAtPath:filePath];
+    // 写入文件
+    NSString* newFilePath = [NSString stringWithFormat:@"%@%@",[filePath substringToIndex:filePath.length-5],newType];
+    [defaultManager createFileAtPath:newFilePath contents:data attributes:nil];
+    return newFilePath;
+}
+
 @end
