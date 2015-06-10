@@ -112,6 +112,7 @@
         
         ActDataFile* file = [[ActDataFile alloc] init];
         file.dateStr = @"2015-06-10";
+        
         NSString* path = [file copyFileWithNewType:@"txt"];        
         
         NSData *data = [NSData dataWithContentsOfFile:path];
