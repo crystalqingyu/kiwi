@@ -423,7 +423,7 @@ static NSString * const reuseIdentifier = @"ActRecordCell";
 }
 
 // appDelegateWillTerminate代理实现：退出程序时执行的
-- (void)willTerminateApp {
+- (void)saveLastRecord {
     if (_currentStateView!=nil) {
         // 系统默认偏好设置
         NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];

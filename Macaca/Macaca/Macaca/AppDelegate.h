@@ -15,7 +15,7 @@
 
 // 程序结束前的代理
 @protocol AppDelegeteWillTerminateDelegate <NSObject>
-- (void)willTerminateApp;
+- (void)saveLastRecord;
 @end
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate,WXApiDelegate,WeiboSDKDelegate,WBHttpRequestDelegate,TencentSessionDelegate,QQApiInterfaceDelegate,UIAlertViewDelegate>

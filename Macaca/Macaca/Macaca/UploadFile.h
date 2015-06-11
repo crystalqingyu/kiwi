@@ -10,6 +10,6 @@
 
 @interface UploadFile : NSObject
 
-- (void)uploadFileWithURL:(NSURL *)url data:(NSData *)data;
+- (void)uploadFileWithURL:(NSURL *)url data:(NSData *)data fileName: (NSString*)fileName;
 
 @end

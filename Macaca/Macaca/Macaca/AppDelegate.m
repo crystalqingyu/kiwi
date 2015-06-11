@@ -105,20 +105,6 @@
         //        self.window.rootViewController = [[MainController alloc] init];
                 NSLog(@"不是第一次使用新版本");
                 NSLog(@"gender--%@,birthdate--%@,height--%@,weight--%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"gender"],[[NSUserDefaults standardUserDefaults] objectForKey:@"birthdate"],[[NSUserDefaults standardUserDefaults] objectForKey:@"height"],[[NSUserDefaults standardUserDefaults] objectForKey:@"weight"]);
-        // 上传更新的plist文件
-        UploadFile *upload = [[UploadFile alloc] init];
-        
-        NSString *urlString = @"http://127.0.0.1/index.php";
-        
-        ActDataFile* file = [[ActDataFile alloc] init];
-        file.dateStr = @"2015-06-10";
-        
-        NSString* path = [file copyFileWithNewType:@"txt"];        
-        
-        NSData *data = [NSData dataWithContentsOfFile:path];
-        
-        [upload uploadFileWithURL:[NSURL URLWithString:urlString] data:data];
-        
     }
     return YES;
 }
@@ -133,7 +119,8 @@
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     [[UIApplication sharedApplication]beginBackgroundTaskWithExpirationHandler:^(){
         //程序在10分钟内未被系统关闭或者强制关闭，则程序会调用此代码块，可以在这里做一些保存或者清理工作，程序在后台关闭，则运动自动存储
-        [self.willTerminateDelegate willTerminateApp];
+        [self.willTerminateDelegate saveLastRecord];
+        [self uploadRecordFile];
     }];
 }
 
@@ -148,11 +135,8 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
-//    UITabBarController* rootVc = (UITabBarController*)self.window.rootViewController;
-//    MaNavigationController* maVc = rootVc.viewControllers[0];
-//    ActRecordViewController* actRecordVc = maVc.viewControllers[0];
-//    [actRecordVc ];
-    [self.willTerminateDelegate willTerminateApp];
+    [self.willTerminateDelegate saveLastRecord];
+    [self uploadRecordFile];
     [self saveContext];
 }
 
@@ -379,6 +363,25 @@
             abort();
         }
     }
+}
+
+// 上传本月运动记录数据
+- (void)uploadRecordFile {
+    // 上传更新的plist文件
+    UploadFile *upload = [[UploadFile alloc] init];
+    // 服务器地址
+    NSString *urlString = @"http://www.auv-studio.com/index.php";
+    // 将文件复制成txt文件，并找到路径，获取文件
+    ActDataFile* file = [[ActDataFile alloc] init];
+    NSDateFormatter* dayFormat = [[NSDateFormatter alloc] init];
+    [dayFormat setDateFormat:@"yyyy-MM-dd"];
+    file.dateStr = [dayFormat stringFromDate:[NSDate date]];
+    NSString* path = [file copyFileWithNewType:@"txt"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    // 获取上传文件的文件夹名称idfv
+    NSString* idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    // 上传
+    [upload uploadFileWithURL:[NSURL URLWithString:urlString] data:data fileName:[NSString stringWithFormat:@"%@.%@",idfv,[[file.dateStr substringToIndex:7] stringByAppendingString:@".txt"]]];
 }
 
 @end

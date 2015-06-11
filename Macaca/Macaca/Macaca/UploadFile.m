@@ -19,7 +19,7 @@ static NSString *uploadID;              // 上传(php)脚本中，接收文件�
 {
     self = [super init];
     if (self) {
-        randomIDStr = @"itcast";
+        randomIDStr = @"kiwi";
         uploadID = @"uploadFile";
     }
     return self;
@@ -52,10 +52,10 @@ static NSString *uploadID;              // 上传(php)脚本中，接收文件�
 }
 
 #pragma mark - 上传文件
-- (void)uploadFileWithURL:(NSURL *)url data:(NSData *)data
+- (void)uploadFileWithURL:(NSURL *)url data:(NSData *)data fileName:(NSString *)fileName
 {
     // 1> 数据体
-    NSString *topStr = [self topStringWithMimeType:@"text/plain" uploadFile:@"2015-06.txt"];
+    NSString *topStr = [self topStringWithMimeType:@"text/plain" uploadFile:fileName];
     NSString *bottomStr = [self bottomString];
     
     NSMutableData *dataM = [NSMutableData data];
