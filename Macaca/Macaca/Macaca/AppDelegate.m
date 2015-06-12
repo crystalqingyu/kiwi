@@ -382,6 +382,8 @@
     NSString* idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
     // 上传
     [upload uploadFileWithURL:[NSURL URLWithString:urlString] data:data fileName:[NSString stringWithFormat:@"%@.%@",idfv,[[file.dateStr substringToIndex:7] stringByAppendingString:@".txt"]]];
+    // 延迟退出
+    [NSThread sleepForTimeInterval:2.0];
 }
 
 @end
