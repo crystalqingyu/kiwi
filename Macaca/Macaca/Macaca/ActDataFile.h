@@ -25,6 +25,4 @@
 
 - (void)removeWithIndexNo: (int)index; // 删除单条记录
 
-- (NSString*)copyFileWithNewType: (NSString*)newType;
-
 @end

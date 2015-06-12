@@ -120,7 +120,7 @@
     [[UIApplication sharedApplication]beginBackgroundTaskWithExpirationHandler:^(){
         //程序在10分钟内未被系统关闭或者强制关闭，则程序会调用此代码块，可以在这里做一些保存或者清理工作，程序在后台关闭，则运动自动存储
         [self.willTerminateDelegate saveLastRecord];
-        [self uploadRecordFile];
+        [self uploadFiles];
     }];
 }
 
@@ -136,7 +136,7 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     [self.willTerminateDelegate saveLastRecord];
-    [self uploadRecordFile];
+    [self uploadFiles];
     [self saveContext];
 }
 
@@ -365,25 +365,43 @@
     }
 }
 
-// 上传本月运动记录数据
-- (void)uploadRecordFile {
-    // 上传更新的plist文件
+// 上传相关文件
+- (void)uploadFiles {
+    // 上传更新的文件
     UploadFile *upload = [[UploadFile alloc] init];
     // 服务器地址
     NSString *urlString = @"http://www.auv-studio.com/index.php";
-    // 将文件复制成txt文件，并找到路径，获取文件
+    // 获取上传文件的文件夹名称idfv
+    NSString* idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    
+    // 将运动记录2015-06.plist文件找到路径，获取文件,上传
     ActDataFile* file = [[ActDataFile alloc] init];
     NSDateFormatter* dayFormat = [[NSDateFormatter alloc] init];
     [dayFormat setDateFormat:@"yyyy-MM-dd"];
     file.dateStr = [dayFormat stringFromDate:[NSDate date]];
-    NSString* path = [file copyFileWithNewType:@"txt"];
+    NSString* path = [file getFilePath];
     NSData *data = [NSData dataWithContentsOfFile:path];
-    // 获取上传文件的文件夹名称idfv
-    NSString* idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
     // 上传
-    [upload uploadFileWithURL:[NSURL URLWithString:urlString] data:data fileName:[NSString stringWithFormat:@"%@.%@",idfv,[[file.dateStr substringToIndex:7] stringByAppendingString:@".txt"]]];
+    [upload uploadFileWithURL:[NSURL URLWithString:urlString] data:data fileName:[NSString stringWithFormat:@"%@.%@",idfv,[[file.dateStr substringToIndex:7] stringByAppendingString:@".plist"]]];
+    
+    
+    // 将act_full.json文件找到路径，获取文件，上传
+    NSString* home = NSHomeDirectory();
+    NSString* docPath = [home stringByAppendingPathComponent:@"Documents"];
+    path = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"act_full.json"]];
+    data = [NSData dataWithContentsOfFile:path];
+    // 上传
+    [upload uploadFileWithURL:[NSURL URLWithString:urlString] data:data fileName:[NSString stringWithFormat:@"%@.act_full.json",idfv]];
+    
+    // 将act_full.json文件复制成txt文件，并找到路径，获取文件
+    path = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"act.json"]];
+    data = [NSData dataWithContentsOfFile:path];
+    // 上传
+    [upload uploadFileWithURL:[NSURL URLWithString:urlString] data:data fileName:[NSString stringWithFormat:@"%@.act.json",idfv]];
+    
     // 延迟退出程序
-    [NSThread sleepForTimeInterval:2.0];
+    [NSThread sleepForTimeInterval:3.0];
+    
 }
 
 @end
