@@ -62,7 +62,7 @@
                 NSLog(@"gender--%@,birthdate--%@,height--%@,weight--%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"gender"],[[NSUserDefaults standardUserDefaults] objectForKey:@"birthdate"],[[NSUserDefaults standardUserDefaults] objectForKey:@"height"],[[NSUserDefaults standardUserDefaults] objectForKey:@"weight"]);
         
         // 手机从没有安装过应用，通过keychain设置UUID（如果有直接取）
-        if (![_wrapper objectForKey:(__bridge id)kSecValueData]) {
+        if ([[_wrapper objectForKey:(__bridge id)kSecValueData] isEqualToString:@""]) {
             // 获取上传文件的文件夹名称idfv
             NSString* uuid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
             //保存数据
