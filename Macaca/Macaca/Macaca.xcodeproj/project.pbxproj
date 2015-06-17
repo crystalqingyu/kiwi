@@ -11,6 +11,7 @@
 		3C98AEDB1B25A77A00B3391D /* SelectDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E30EC9AB1AD45ABC00CCEFDB /* SelectDateViewController.m */; };
 		3C98AEDE1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C98AEDD1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.m */; };
 		3C9CDF131B2828DA0046F3DD /* UploadFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9CDF121B2828DA0046F3DD /* UploadFile.m */; };
+		3CDBEB5A1B3166FC00CBEFFE /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDBEB591B3166FC00CBEFFE /* KeychainItemWrapper.m */; };
 		E306C8D81AC2BF03005AF950 /* pingfen.png in Resources */ = {isa = PBXBuildFile; fileRef = E306C8D71AC2BF03005AF950 /* pingfen.png */; };
 		E306C8DA1AC2BF7E005AF950 /* contact.png in Resources */ = {isa = PBXBuildFile; fileRef = E306C8D91AC2BF7E005AF950 /* contact.png */; };
 		E306C9291AC41C06005AF950 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E306C9271AC41C06005AF950 /* ShareViewController.m */; };
@@ -243,6 +244,8 @@
 		3C98AEDD1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXReorderableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		3C9CDF111B2828DA0046F3DD /* UploadFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadFile.h; sourceTree = "<group>"; };
 		3C9CDF121B2828DA0046F3DD /* UploadFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadFile.m; sourceTree = "<group>"; };
+		3CDBEB581B3166FC00CBEFFE /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		3CDBEB591B3166FC00CBEFFE /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		E306C8D71AC2BF03005AF950 /* pingfen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pingfen.png; sourceTree = "<group>"; };
 		E306C8D91AC2BF7E005AF950 /* contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contact.png; sourceTree = "<group>"; };
 		E306C9261AC41C06005AF950 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
@@ -598,13 +601,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E30EC9991AD3DE8F00CCEFDB /* Security.framework in Frameworks */,
 				3C98AED91B25A02D00B3391D /* QuartzCore.framework in Frameworks */,
 				E30EC9A31AD3DEFB00CCEFDB /* libstdc++.dylib in Frameworks */,
 				E30EC9A11AD3DEEB00CCEFDB /* CoreTelephony.framework in Frameworks */,
 				E30EC99F1AD3DEDB00CCEFDB /* libsqlite3.dylib in Frameworks */,
 				E30EC99D1AD3DEC400CCEFDB /* CoreGraphics.framework in Frameworks */,
 				E30EC99B1AD3DEAA00CCEFDB /* libiconv.dylib in Frameworks */,
-				E30EC9991AD3DE8F00CCEFDB /* Security.framework in Frameworks */,
 				E30EC98F1ACD62F500CCEFDB /* ImageIO.framework in Frameworks */,
 				E30EC9971AD3DD9800CCEFDB /* TencentOpenAPI.framework in Frameworks */,
 				E30EC97C1ACBF11900CCEFDB /* AudioToolbox.framework in Frameworks */,
@@ -635,6 +638,8 @@
 			children = (
 				3C98AEDC1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.h */,
 				3C98AEDD1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.m */,
+				3CDBEB581B3166FC00CBEFFE /* KeychainItemWrapper.h */,
+				3CDBEB591B3166FC00CBEFFE /* KeychainItemWrapper.m */,
 			);
 			name = SDK;
 			sourceTree = "<group>";
@@ -1627,6 +1632,7 @@
 				E3CE8FCF1A3AEC470043B511 /* ArrowSettingItem.m in Sources */,
 				E3E6D6591A36E5A40061931F /* ActRecordCellItem.m in Sources */,
 				E3C2D08B1A42E131003B304F /* DateChooseViewController.m in Sources */,
+				3CDBEB5A1B3166FC00CBEFFE /* KeychainItemWrapper.m in Sources */,
 				E3FD1A121A67B46B00C5D761 /* ActQueryEditViewController.m in Sources */,
 				E3CE8FC91A3AEAFC0043B511 /* WeightViewController.m in Sources */,
 				E37FC8541A413B5B00FCCEE5 /* ActQueryViewController.m in Sources */,

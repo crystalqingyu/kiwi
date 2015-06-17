@@ -13,8 +13,11 @@
 #import "TimeIntervalStat.h"
 #import "UploadFile.h"
 #import "ActDataFile.h"
+#import "KeychainItemWrapper.h"
 
 @interface AppDelegate () <shareByWeixinDelegate,shareByWeiboDelegate,shareByQQKongjianDelegate>
+
+@property (nonatomic,strong) KeychainItemWrapper* wrapper;
 
 @end
 
@@ -33,45 +36,9 @@
     [WeiboSDK enableDebugMode:YES];
     [WeiboSDK registerApp:@"2230181521"];
     _tencentOAuth = [[TencentOAuth alloc] initWithAppId:@"1104452027" andDelegate:self];
-//    // 第一次使用初始化偏好设置
-//    // 此为找到plist文件中得版本号所对应的键
-//    NSString *key = (NSString *)kCFBundleVersionKey;
-//    // 1.从plist中取出版本号
-//    NSString *version = [NSBundle mainBundle].infoDictionary[key];
-//    // 2.从沙盒中取出上次存储的版本号
-//    NSString *saveVersion = [[NSUserDefaults  standardUserDefaults] objectForKey:key];
-//    if([version  isEqualToString:saveVersion]) {
-////        //不是第一次使用这个版本
-////        //不显示状态
-////        application.statusBarHidden =NO;
-////        //去调用主界面的内容
-////        self.window.rootViewController = [[MainController alloc] init];
-//        NSLog(@"不是第一次使用新版本");
-//        NSLog(@"gender--%@,birthdate--%@,height--%@,weight--%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"gender"],[[NSUserDefaults standardUserDefaults] objectForKey:@"birthdate"],[[NSUserDefaults standardUserDefaults] objectForKey:@"height"],[[NSUserDefaults standardUserDefaults] objectForKey:@"weight"]);        
-//    } else{
-//        // 版本号不一样：第一次使用新版本
-//        // 将新版本号写入沙盒
-//        [[NSUserDefaults  standardUserDefaults] setObject:version forKey:key];
-//        [[NSUserDefaults  standardUserDefaults] synchronize];
-//        // 系统默认偏好设置
-//        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-//        // 存储数据
-//        [defaults setObject:[NSString stringWithFormat:@"%d",1] forKey:@"gender"];
-//        
-//        NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
-//        [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//        NSString *currentDateStr = [dateFormat stringFromDate:[NSDate date]];
-//        [defaults setObject:[NSString stringWithFormat:@"%@",currentDateStr] forKey:@"birthdate"];
-//        NSLog(@"%@",currentDateStr);
-//        
-//        [defaults setObject:[NSString stringWithFormat:@"%d",160] forKey:@"height"];
-//        [defaults setObject:[NSString stringWithFormat:@"%d",50] forKey:@"weight"];
-//        // 立刻同步
-//        [defaults synchronize];
-//        NSLog(@"第一次使用新版本");
-//        NSLog(@"gender--%@,birthdate--%@,height--%@,weight--%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"gender"],[[NSUserDefaults standardUserDefaults] objectForKey:@"birthdate"],[[NSUserDefaults standardUserDefaults] objectForKey:@"height"],[[NSUserDefaults standardUserDefaults] objectForKey:@"weight"]);
-//    }
-//    return YES;
+    // 初始化一个保存用户帐号的KeychainItemWrapper
+    _wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:@"kiwi"
+                                                   accessGroup:nil];
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
         
@@ -93,6 +60,14 @@
                 [defaults synchronize];
                 NSLog(@"第一次使用新版本");
                 NSLog(@"gender--%@,birthdate--%@,height--%@,weight--%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"gender"],[[NSUserDefaults standardUserDefaults] objectForKey:@"birthdate"],[[NSUserDefaults standardUserDefaults] objectForKey:@"height"],[[NSUserDefaults standardUserDefaults] objectForKey:@"weight"]);
+        
+        // 通过keychain设置UUID（如果有直接取）
+        if (![_wrapper objectForKey:(__bridge id)kSecValueData]) {
+            // 获取上传文件的文件夹名称idfv
+            NSString* uuid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+            //保存数据
+            [_wrapper setObject:uuid forKey:(__bridge id)kSecValueData];
+        }
         
     }else {
         
@@ -371,8 +346,9 @@
     UploadFile *upload = [[UploadFile alloc] init];
     // 服务器地址
     NSString *urlString = @"http://www.auv-studio.com/index.php";
-    // 获取上传文件的文件夹名称idfv
-    NSString* idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    // 获取上传文件的文件夹名称idfv，从keychain里取出帐号密码
+    NSString *uuid = [_wrapper objectForKey:(__bridge id)kSecValueData];
+    NSLog(@"%@",uuid);
     
     // 将运动记录2015-06.plist文件找到路径，获取文件,上传
     ActDataFile* file = [[ActDataFile alloc] init];
@@ -382,7 +358,7 @@
     NSString* path = [file getFilePath];
     NSData *data = [NSData dataWithContentsOfFile:path];
     // 上传
-    [upload uploadFileWithURL:[NSURL URLWithString:urlString] data:data fileName:[NSString stringWithFormat:@"%@.%@",idfv,[[file.dateStr substringToIndex:7] stringByAppendingString:@".plist"]]];
+    [upload uploadFileWithURL:[NSURL URLWithString:urlString] data:data fileName:[NSString stringWithFormat:@"%@.%@",uuid,[[file.dateStr substringToIndex:7] stringByAppendingString:@".plist"]]];
     
     
     // 将act_full.json文件找到路径，获取文件，上传
@@ -391,13 +367,13 @@
     path = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"act_full.json"]];
     data = [NSData dataWithContentsOfFile:path];
     // 上传
-    [upload uploadFileWithURL:[NSURL URLWithString:urlString] data:data fileName:[NSString stringWithFormat:@"%@.act_full.json",idfv]];
+    [upload uploadFileWithURL:[NSURL URLWithString:urlString] data:data fileName:[NSString stringWithFormat:@"%@.act_full.json",uuid]];
     
     // 将act_full.json文件复制成txt文件，并找到路径，获取文件
     path = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"act.json"]];
     data = [NSData dataWithContentsOfFile:path];
     // 上传
-    [upload uploadFileWithURL:[NSURL URLWithString:urlString] data:data fileName:[NSString stringWithFormat:@"%@.act.json",idfv]];
+    [upload uploadFileWithURL:[NSURL URLWithString:urlString] data:data fileName:[NSString stringWithFormat:@"%@.act.json",uuid]];
     
     // 延迟退出程序
     [NSThread sleepForTimeInterval:3.0];
