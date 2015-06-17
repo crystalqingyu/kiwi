@@ -35,10 +35,6 @@ static NSString * const reuseIdentifier = @"ActRecordCell";
         NSString* filePath = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"act.json"]];
         // 加载json文件
         NSData* data = [NSData dataWithContentsOfFile:filePath];
-        if (data==nil) {
-            data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"act.json" ofType:nil]];
-            [data writeToFile:filePath atomically:YES];
-        }
         // 将JASON数据转为数组
         NSArray* dataArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         // 将数组中字典转为模型

@@ -61,13 +61,23 @@
                 NSLog(@"第一次使用新版本");
                 NSLog(@"gender--%@,birthdate--%@,height--%@,weight--%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"gender"],[[NSUserDefaults standardUserDefaults] objectForKey:@"birthdate"],[[NSUserDefaults standardUserDefaults] objectForKey:@"height"],[[NSUserDefaults standardUserDefaults] objectForKey:@"weight"]);
         
-        // 通过keychain设置UUID（如果有直接取）
+        // 手机从没有安装过应用，通过keychain设置UUID（如果有直接取）
         if (![_wrapper objectForKey:(__bridge id)kSecValueData]) {
             // 获取上传文件的文件夹名称idfv
             NSString* uuid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
             //保存数据
             [_wrapper setObject:uuid forKey:(__bridge id)kSecValueData];
         }
+        
+        // 将mainbundle中的act.json、act_full.json导入documents中
+        NSString* home = NSHomeDirectory(); // 路径
+        NSString* docPath = [home stringByAppendingPathComponent:@"Documents"];
+        NSString* actfilePath = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"act.json"]];
+        NSData* actData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"act.json" ofType:nil]];
+        [actData writeToFile:actfilePath atomically:YES];
+        NSString* actFullfilePath = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"act_full.json"]];
+        NSData* actFullData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"act_full.json" ofType:nil]];
+        [actFullData writeToFile:actFullfilePath atomically:YES];
         
     }else {
         
