@@ -59,7 +59,7 @@
     };
     
     SettingItem* item1 = [ArrowSettingItem settingItemWithIcon:@"" text:@"功能介绍" desClass:[VersionIntroductionViewController class]];
-    item1.detailText = @"2.0版本新增功能";
+    item1.detailText = @"2.1版本新增功能";
 
     GroupSetting* group = [[GroupSetting alloc] init];
 //    group.footer = @"敬请期待";
