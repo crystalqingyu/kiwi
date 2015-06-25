@@ -12,6 +12,7 @@
 		3C98AEDE1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C98AEDD1B25A7F600B3391D /* LXReorderableCollectionViewFlowLayout.m */; };
 		3C9CDF131B2828DA0046F3DD /* UploadFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9CDF121B2828DA0046F3DD /* UploadFile.m */; };
 		3CDBEB5A1B3166FC00CBEFFE /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDBEB591B3166FC00CBEFFE /* KeychainItemWrapper.m */; };
+		3CE73D301B3BF9400039A908 /* FileDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE73D2F1B3BF9400039A908 /* FileDownload.m */; };
 		E306C8D81AC2BF03005AF950 /* pingfen.png in Resources */ = {isa = PBXBuildFile; fileRef = E306C8D71AC2BF03005AF950 /* pingfen.png */; };
 		E306C8DA1AC2BF7E005AF950 /* contact.png in Resources */ = {isa = PBXBuildFile; fileRef = E306C8D91AC2BF7E005AF950 /* contact.png */; };
 		E306C9291AC41C06005AF950 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E306C9271AC41C06005AF950 /* ShareViewController.m */; };
@@ -246,6 +247,8 @@
 		3C9CDF121B2828DA0046F3DD /* UploadFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadFile.m; sourceTree = "<group>"; };
 		3CDBEB581B3166FC00CBEFFE /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		3CDBEB591B3166FC00CBEFFE /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
+		3CE73D2E1B3BF9400039A908 /* FileDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileDownload.h; sourceTree = "<group>"; };
+		3CE73D2F1B3BF9400039A908 /* FileDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileDownload.m; sourceTree = "<group>"; };
 		E306C8D71AC2BF03005AF950 /* pingfen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pingfen.png; sourceTree = "<group>"; };
 		E306C8D91AC2BF7E005AF950 /* contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contact.png; sourceTree = "<group>"; };
 		E306C9261AC41C06005AF950 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
@@ -782,6 +785,8 @@
 		E37FC85B1A4195FF00FCCEE5 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				3CE73D2E1B3BF9400039A908 /* FileDownload.h */,
+				3CE73D2F1B3BF9400039A908 /* FileDownload.m */,
 				E30EC9901ACDBDFE00CCEFDB /* TimeIntervalStat.h */,
 				E30EC9911ACDBDFE00CCEFDB /* TimeIntervalStat.m */,
 				E352C9341A8A0856003DC72C /* GuideViewController.h */,
@@ -1612,6 +1617,7 @@
 				E3CE8FB01A3AC1E70043B511 /* GroupSetting.m in Sources */,
 				E3E6D6191A36A49F0061931F /* AppDelegate.m in Sources */,
 				E37FC8611A419A9000FCCEE5 /* ActItem.m in Sources */,
+				3CE73D301B3BF9400039A908 /* FileDownload.m in Sources */,
 				E3CE8FC61A3AEAEB0043B511 /* HeightViewController.m in Sources */,
 				E3E6D6161A36A49F0061931F /* main.m in Sources */,
 				E3AE26441AB838A900F35BB7 /* ActDataFile.m in Sources */,

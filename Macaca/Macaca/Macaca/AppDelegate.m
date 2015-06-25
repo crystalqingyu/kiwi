@@ -14,6 +14,7 @@
 #import "UploadFile.h"
 #import "ActDataFile.h"
 #import "KeychainItemWrapper.h"
+#import "FileDownload.h"
 
 @interface AppDelegate () <shareByWeixinDelegate,shareByWeiboDelegate,shareByQQKongjianDelegate>
 
@@ -47,22 +48,78 @@
         [_wrapper setObject:uuid forKey:(__bridge id)kSecValueData];
     }
     
-    // 将mainbundle中的act.json、act_full.json导入documents中
+    // 判断是否应该升级新版本
+    NSURL* url = [NSURL URLWithString:@"http://itunes.apple.com/lookup?id=966621372"];
+    NSURLRequest* request = [[NSURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:10.0];
+    [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse* response, NSData* data, NSError* connectionError){
+        // 判断连接有无错误
+        if (connectionError==nil) {
+            NSError* jsonError;
+            NSDictionary* appInfoDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&jsonError];
+            // 判断序列化有无错误
+            if (jsonError==nil) {
+                NSArray* resultsArray = [appInfoDict objectForKey:@"results"];
+                NSString* latestVersion = [resultsArray[0] objectForKey:@"version"];
+                NSString* bugFix = [resultsArray[0] objectForKey:@"releaseNotes"];
+                // 检测当前版本
+                NSString* currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+                // 两个版本比较
+                if ([latestVersion doubleValue]>[currentVersion doubleValue]) {
+                    // 更新主界面，弹出alertView
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^(void){
+                        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"有新版本%@",latestVersion] message:[NSString stringWithFormat:@"* 可查询任意一天的运动量\n* 可将运动结果分享到微信、新浪微博等平台\n%@",bugFix] delegate:self cancelButtonTitle:@"忽略" otherButtonTitles:@"去升级", nil];
+                        [alertView show];
+                    }];
+                }
+                NSLog(@"%@,%@",latestVersion,currentVersion);
+            } else {
+                NSLog(@"%@",[jsonError description]);
+            }
+        } else {
+            NSLog(@"%@",[connectionError description]);
+        }
+    }];
+    
+    // 从服务器端下载act.json、act_full.json
+    [self downloadFiles];
+    // 获取documents文件路径
     NSString* home = NSHomeDirectory(); // 路径
     NSString* docPath = [home stringByAppendingPathComponent:@"Documents"];
+    // 处理act.json
     NSString* actfilePath = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"act.json"]];
     NSData* actData = [NSData dataWithContentsOfFile:actfilePath];
-    if (actData==nil) {
+    if (actData==nil) { // documents中没有文件
+        // mainBundle文件导入
         actData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"act.json" ofType:nil]];
         [actData writeToFile:actfilePath atomically:YES];
     }
+    // cache中act.json文件导入
+    actData = [NSData dataWithContentsOfFile:[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"act.json"]];
+    if (actData!=nil) {
+        [actData writeToFile:actfilePath atomically:YES];
+    }
+#warning 提取数组！！！
+#warning 测试用：mainBundle文件导入，不加这段暂时不能运行
+    actData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"act.json" ofType:nil]];
+    [actData writeToFile:actfilePath atomically:YES];
+    // 处理act_full.json
     NSString* actFullfilePath = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"act_full.json"]];
     NSData* actFullData = [NSData dataWithContentsOfFile:actFullfilePath];
     if (actFullData==nil) {
         actFullData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"act_full.json" ofType:nil]];
         [actFullData writeToFile:actFullfilePath atomically:YES];
     }
+    // cache中act_full.json文件导入
+    actFullData = [NSData dataWithContentsOfFile:[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"act_full.json"]];
+    if (actFullData!=nil) {
+        [actFullData writeToFile:actFullfilePath atomically:YES];
+    }
+#warning 提取数组！！！
+#warning 测试用：mainBundle文件导入，不加这段暂时不能运行
+    actFullData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"act_full.json" ofType:nil]];
+    [actFullData writeToFile:actFullfilePath atomically:YES];
     
+    // 判断是否第一次登录
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
         
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
@@ -355,6 +412,8 @@
     }
 }
 
+#pragma - mark 文件处理
+
 // 上传相关文件
 - (void)uploadFiles {
     // 上传更新的文件
@@ -393,6 +452,21 @@
     // 延迟退出程序
     [NSThread sleepForTimeInterval:3.0];
     
+}
+
+// 下载相关文件
+- (void)downloadFiles {
+    NSURL* actFileUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.auv-studio.com/kiwi/user_file/%@.act.json",[_wrapper objectForKey:(__bridge id)kSecValueData]]];
+    NSLog(@"%@",actFileUrl);
+    NSURL* actFullFileUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.auv-studio.com/kiwi/user_file/%@.act_full.json",[_wrapper objectForKey:(__bridge id)kSecValueData]]];
+    // 下载act.json文件到cache
+    FileDownload* downloadAct = [[FileDownload alloc] init];
+    downloadAct.fileName = @"act.json";
+    [downloadAct downloadFileWithURL:actFileUrl];
+    // 下载act.json文件到cache
+    FileDownload* downloadActFull = [[FileDownload alloc] init];
+    downloadActFull.fileName = @"act_full.json";
+    [downloadActFull downloadFileWithURL:actFullFileUrl];
 }
 
 @end
