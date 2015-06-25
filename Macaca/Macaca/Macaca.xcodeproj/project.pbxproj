@@ -481,7 +481,7 @@
 		E3E503BE1A8B323700DDC65A /* guide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide.png; sourceTree = "<group>"; };
 		E3E503BF1A8B323700DDC65A /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile.png; sourceTree = "<group>"; };
 		E3E503C01A8B323700DDC65A /* update.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = update.png; sourceTree = "<group>"; };
-		E3E6D6101A36A49F0061931F /* Macaca.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Macaca.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3E6D6101A36A49F0061931F /* 猕猴桃.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "猕猴桃.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3E6D6141A36A49F0061931F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E3E6D6151A36A49F0061931F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E3E6D6171A36A49F0061931F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -993,7 +993,7 @@
 		E3E6D6111A36A49F0061931F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E3E6D6101A36A49F0061931F /* Macaca.app */,
+				E3E6D6101A36A49F0061931F /* 猕猴桃.app */,
 				E3E6D62C1A36A4A00061931F /* MacacaTests.xctest */,
 			);
 			name = Products;
@@ -1363,7 +1363,7 @@
 			);
 			name = Macaca;
 			productName = Macaca;
-			productReference = E3E6D6101A36A49F0061931F /* Macaca.app */;
+			productReference = E3E6D6101A36A49F0061931F /* 猕猴桃.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E3E6D62B1A36A4A00061931F /* MacacaTests */ = {
@@ -1786,8 +1786,8 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_NAME = Macaca;
-				PROVISIONING_PROFILE = "";
+				PRODUCT_NAME = "猕猴桃";
+				PROVISIONING_PROFILE = "a988be58-f404-4d0e-b98f-3e60c6090712";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
@@ -1817,8 +1817,8 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_NAME = Macaca;
-				PROVISIONING_PROFILE = "";
+				PRODUCT_NAME = "猕猴桃";
+				PROVISIONING_PROFILE = "a988be58-f404-4d0e-b98f-3e60c6090712";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
