@@ -80,44 +80,50 @@
         }
     }];
     
+    
     // 从服务器端下载act.json、act_full.json
     [self downloadFiles];
+    // 获取cache文件路径
+    NSString* cachePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
     // 获取documents文件路径
     NSString* home = NSHomeDirectory(); // 路径
     NSString* docPath = [home stringByAppendingPathComponent:@"Documents"];
+    // 生成文件指针
+    NSFileManager* fileManager = [NSFileManager defaultManager];
     // 处理act.json
+    NSString* actFileCachePath = [cachePath stringByAppendingPathComponent:@"act.json"];
     NSString* actfilePath = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"act.json"]];
-    NSData* actData = [NSData dataWithContentsOfFile:actfilePath];
-    if (actData==nil) { // documents中没有文件
-        // mainBundle文件导入
-        actData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"act.json" ofType:nil]];
+    NSData* actData = [NSData data];
+    if ([fileManager fileExistsAtPath:actFileCachePath]) { // cache中有缓存文件
+        // cache中文件写入document
+        actData = [actData initWithContentsOfFile:actFileCachePath];
+        // 提取数组，写入文件
+        NSString *result = [[NSString alloc] initWithData:actData encoding:NSUTF8StringEncoding];
+        NSArray* resultArray = [result componentsSeparatedByString:@"--"];
+        actData = [resultArray[0] dataUsingEncoding:NSUTF8StringEncoding];
+        [actData writeToFile:actfilePath atomically:YES];
+    } else if (![fileManager fileExistsAtPath:actfilePath]) { // doc中没有文件情况，如果有文件就使用原有document文件
+        // mainBundle文件导入document
+        actData = [actData initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"act.json" ofType:nil]];
         [actData writeToFile:actfilePath atomically:YES];
     }
-    // cache中act.json文件导入
-    actData = [NSData dataWithContentsOfFile:[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"act.json"]];
-    if (actData!=nil) {
-        [actData writeToFile:actfilePath atomically:YES];
-    }
-#warning 提取数组！！！
-#warning 测试用：mainBundle文件导入，不加这段暂时不能运行
-    actData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"act.json" ofType:nil]];
-    [actData writeToFile:actfilePath atomically:YES];
     // 处理act_full.json
+    NSString* actFullFileCachePath = [cachePath stringByAppendingPathComponent:@"act_full.json"];
     NSString* actFullfilePath = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"act_full.json"]];
-    NSData* actFullData = [NSData dataWithContentsOfFile:actFullfilePath];
-    if (actFullData==nil) {
-        actFullData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"act_full.json" ofType:nil]];
+    NSData* actFullData = [NSData data];
+    if ([fileManager fileExistsAtPath:actFullFileCachePath]) { // cache中有缓存文件
+        // cache中文件写入document
+        actFullData = [actFullData initWithContentsOfFile:actFullFileCachePath];
+        // 提取数组，写入文件
+        NSString *result = [[NSString alloc] initWithData:actFullData encoding:NSUTF8StringEncoding];
+        NSArray* resultArray = [result componentsSeparatedByString:@"--"];
+        actFullData = [resultArray[0] dataUsingEncoding:NSUTF8StringEncoding];
+        [actFullData writeToFile:actFullfilePath atomically:YES];
+    } else if (![fileManager fileExistsAtPath:actFullfilePath]) { // doc中没有文件
+        // mainBundle文件导入document
+        actFullData = [actFullData initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"act_full.json" ofType:nil]];
         [actFullData writeToFile:actFullfilePath atomically:YES];
     }
-    // cache中act_full.json文件导入
-    actFullData = [NSData dataWithContentsOfFile:[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:@"act_full.json"]];
-    if (actFullData!=nil) {
-        [actFullData writeToFile:actFullfilePath atomically:YES];
-    }
-#warning 提取数组！！！
-#warning 测试用：mainBundle文件导入，不加这段暂时不能运行
-    actFullData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"act_full.json" ofType:nil]];
-    [actFullData writeToFile:actFullfilePath atomically:YES];
     
     // 判断是否第一次登录
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
@@ -168,6 +174,8 @@
         //程序在10分钟内未被系统关闭或者强制关闭，则程序会调用此代码块，可以在这里做一些保存或者清理工作，程序在后台关闭，则运动自动存储
         [self.willTerminateDelegate saveLastRecord];
         [self uploadFiles];
+        // 删除cache中相关文件
+        [self deleteFiles];
     }];
 }
 
@@ -185,6 +193,8 @@
     [self.willTerminateDelegate saveLastRecord];
     [self uploadFiles];
     [self saveContext];
+    // 删除cache中相关文件
+    [self deleteFiles];
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
@@ -467,6 +477,19 @@
     FileDownload* downloadActFull = [[FileDownload alloc] init];
     downloadActFull.fileName = @"act_full.json";
     [downloadActFull downloadFileWithURL:actFullFileUrl];
+}
+
+// 删除cache中相关文件
+- (void)deleteFiles {
+    // 获取cache路径
+    NSString* cachePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
+    // 获取删除的文件路径
+    NSString* actFileCachePath = [cachePath stringByAppendingPathComponent:@"act.json"];
+    NSString* actFullFileCachePath = [cachePath stringByAppendingPathComponent:@"act_full.json"];
+    // 删除文件
+    NSFileManager* manager = [NSFileManager defaultManager];
+    [manager removeItemAtPath:actFileCachePath error:nil];
+    [manager removeItemAtPath:actFullFileCachePath error:nil];
 }
 
 @end
