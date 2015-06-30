@@ -146,7 +146,7 @@
                 [defaults synchronize];
                 NSLog(@"第一次使用新版本");
                 NSLog(@"gender--%@,birthdate--%@,height--%@,weight--%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"gender"],[[NSUserDefaults standardUserDefaults] objectForKey:@"birthdate"],[[NSUserDefaults standardUserDefaults] objectForKey:@"height"],[[NSUserDefaults standardUserDefaults] objectForKey:@"weight"]);
-        
+#warning // 下载用户所有plist文件到document中
     }else {
         
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunch"];
@@ -435,6 +435,7 @@
     NSLog(@"%@",uuid);
     
     // 将运动记录2015-06.plist文件找到路径，获取文件,上传
+    upload.fileType = @"text/xml";
     ActDataFile* file = [[ActDataFile alloc] init];
     NSDateFormatter* dayFormat = [[NSDateFormatter alloc] init];
     [dayFormat setDateFormat:@"yyyy-MM-dd"];
@@ -446,6 +447,7 @@
     
     
     // 将act_full.json文件找到路径，获取文件，上传
+    upload.fileType = @"text/plain";
     NSString* home = NSHomeDirectory();
     NSString* docPath = [home stringByAppendingPathComponent:@"Documents"];
     path = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"act_full.json"]];
@@ -454,6 +456,7 @@
     [upload uploadFileWithURL:[NSURL URLWithString:urlString] data:data fileName:[NSString stringWithFormat:@"%@.act_full.json",uuid]];
     
     // 将act_full.json文件复制成txt文件，并找到路径，获取文件
+    upload.fileType = @"text/plain";
     path = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"act.json"]];
     data = [NSData dataWithContentsOfFile:path];
     // 上传

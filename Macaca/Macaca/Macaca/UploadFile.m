@@ -55,7 +55,7 @@ static NSString *uploadID;              // 上传(php)脚本中，接收文件�
 - (void)uploadFileWithURL:(NSURL *)url data:(NSData *)data fileName:(NSString *)fileName
 {
     // 1> 数据体
-    NSString *topStr = [self topStringWithMimeType:@"text/plain" uploadFile:fileName];
+    NSString *topStr = [self topStringWithMimeType:_fileType uploadFile:fileName];
     NSString *bottomStr = [self bottomString];
     
     NSMutableData *dataM = [NSMutableData data];
@@ -84,7 +84,7 @@ static NSString *uploadID;              // 上传(php)脚本中，接收文件�
     [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         
         NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"%@", result);
+        NSLog(@"&&&&&&&&&%@&&&&&&&&&", result);
     }];
 }
 

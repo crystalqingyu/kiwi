@@ -10,6 +10,8 @@
 
 @interface UploadFile : NSObject
 
+@property (nonatomic, copy) NSString* fileType;
+
 - (void)uploadFileWithURL:(NSURL *)url data:(NSData *)data fileName: (NSString*)fileName;
 
 @end
