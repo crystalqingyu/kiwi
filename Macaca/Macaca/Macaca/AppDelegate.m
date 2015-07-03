@@ -147,6 +147,16 @@
                 NSLog(@"第一次使用新版本");
                 NSLog(@"gender--%@,birthdate--%@,height--%@,weight--%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"gender"],[[NSUserDefaults standardUserDefaults] objectForKey:@"birthdate"],[[NSUserDefaults standardUserDefaults] objectForKey:@"height"],[[NSUserDefaults standardUserDefaults] objectForKey:@"weight"]);
 #warning // 下载用户所有plist文件到document中
+        NSURL* url = [NSURL URLWithString:@"http://www.auv-studio.com/downloadPlist.php"];
+        NSString* bodyStr = [NSString stringWithFormat:@"uuid=%@",[_wrapper objectForKey:(__bridge id)kSecValueData]];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:2.0f];
+        request.HTTPMethod = @"POST";
+        request.HTTPBody = [bodyStr dataUsingEncoding:NSUTF8StringEncoding];
+        [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            
+            NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSLog(@"downloadPlist&&&&&&&&&%@&&&&&&&&&", result);
+        }];
     }else {
         
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunch"];
