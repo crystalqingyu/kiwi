@@ -11,9 +11,11 @@
 #define kBytesPerTimes 20480
 #define kTimeOut 10.0
 
-@interface FileDownload ()
+@interface FileDownload () <NSURLConnectionDelegate>
 
-@property (nonatomic,strong) NSString* filePath;
+@property (nonatomic, strong) NSString* filePath;
+
+@property (nonatomic, assign) int errorCode;
 
 @end
 
@@ -28,6 +30,11 @@
 }
 
 - (void)downloadFileWithURL: (NSURL*)url {
+    // 判断文件是否存在
+    if (![self isFileExist:url]) {
+        return;
+    }
+    NSLog(@"errorcode===download=======%d",self.errorCode);
     // 获取文件大小
     long long fileSize = [self fileSizeWithURL: url];
     // 判断是否下载;
@@ -58,10 +65,15 @@
     [request setValue:range forHTTPHeaderField:@"Range"];
     // 设置response
     NSURLResponse* response = nil;
+    NSError* error = nil;
     // 连接网络资源
-    NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:NULL];
+    NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     // 追加写入文件
-    [self writeToFilePath: data];
+    if (!error) {
+        [self writeToFilePath: data];
+    } else {
+        NSLog(@"%@",error);
+    }
 }
 
 // 获取文件大小
@@ -69,7 +81,8 @@
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:kTimeOut];
     request.HTTPMethod = @"HEAD";
     NSURLResponse* response = nil;
-    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:NULL];
+    NSError* error = nil;
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     return response.expectedContentLength;
 }
 
@@ -86,6 +99,7 @@
     }
 }
 
+//将下载的文件写入缓存
 - (void)writeToFilePath: (NSData*)data {
     // 打开缓存文件
     NSFileHandle* fileHandle = [NSFileHandle fileHandleForWritingAtPath:self.filePath];
@@ -98,4 +112,28 @@
         [fileHandle closeFile];
     }
 }
+
+// 判断文件是否存在
+- (BOOL)isFileExist: (NSURL* )url {
+    // 连接
+    NSURLRequest* request = [[NSURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:kTimeOut];
+    NSURLResponse* response = nil;
+    NSError* error = nil;
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    // 判断错误代码
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:
+                              NSLocalizedString(@"HTTP Error",
+                                                @"Error message displayed when receving a connection error.")
+                                                         forKey:NSLocalizedDescriptionKey];
+    NSError *responseError = [NSError errorWithDomain:@"HTTP" code:[httpResponse statusCode] userInfo:userInfo];
+    if ([responseError code] == 404) {
+        self.errorCode = 404;
+        NSLog(@"errorcode===didreceive=======%d",self.errorCode);
+        NSLog(@"网络文件不存在");
+        return NO;
+    }
+    return YES;
+}
+
 @end

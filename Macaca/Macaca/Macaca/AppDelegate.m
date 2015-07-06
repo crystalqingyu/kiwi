@@ -20,9 +20,30 @@
 
 @property (nonatomic,strong) KeychainItemWrapper* wrapper;
 
+@property (nonatomic, copy) NSString* documentPath;
+
+@property (nonatomic, copy) NSString* cachePath;
+
 @end
 
 @implementation AppDelegate
+
+- (NSString*)documentPath {
+    if (!_documentPath) {
+        NSString* home = NSHomeDirectory(); // 路径
+        _documentPath = [home stringByAppendingPathComponent:@"Documents"];
+    }
+    NSLog(@"%@",_documentPath);
+    return _documentPath;
+}
+
+- (NSString*)cachePath {
+    if (!_cachePath) {
+        _cachePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
+    }
+    NSLog(@"%@",_cachePath);
+    return _cachePath;
+}
 
 - (id)init{
     if(self = [super init]){
@@ -83,16 +104,11 @@
     
     // 从服务器端下载act.json、act_full.json
     [self downloadFiles];
-    // 获取cache文件路径
-    NSString* cachePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
-    // 获取documents文件路径
-    NSString* home = NSHomeDirectory(); // 路径
-    NSString* docPath = [home stringByAppendingPathComponent:@"Documents"];
     // 生成文件指针
     NSFileManager* fileManager = [NSFileManager defaultManager];
     // 处理act.json
-    NSString* actFileCachePath = [cachePath stringByAppendingPathComponent:@"act.json"];
-    NSString* actfilePath = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"act.json"]];
+    NSString* actFileCachePath = [self.cachePath stringByAppendingPathComponent:@"act.json"];
+    NSString* actfilePath = [self.documentPath stringByAppendingPathComponent:[NSString stringWithFormat:@"act.json"]];
     NSData* actData = [NSData data];
     if ([fileManager fileExistsAtPath:actFileCachePath]) { // cache中有缓存文件
         // cache中文件写入document
@@ -108,8 +124,8 @@
         [actData writeToFile:actfilePath atomically:YES];
     }
     // 处理act_full.json
-    NSString* actFullFileCachePath = [cachePath stringByAppendingPathComponent:@"act_full.json"];
-    NSString* actFullfilePath = [docPath stringByAppendingPathComponent:[NSString stringWithFormat:@"act_full.json"]];
+    NSString* actFullFileCachePath = [self.cachePath stringByAppendingPathComponent:@"act_full.json"];
+    NSString* actFullfilePath = [self.documentPath stringByAppendingPathComponent:[NSString stringWithFormat:@"act_full.json"]];
     NSData* actFullData = [NSData data];
     if ([fileManager fileExistsAtPath:actFullFileCachePath]) { // cache中有缓存文件
         // cache中文件写入document
@@ -146,7 +162,7 @@
                 [defaults synchronize];
                 NSLog(@"第一次使用新版本");
                 NSLog(@"gender--%@,birthdate--%@,height--%@,weight--%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"gender"],[[NSUserDefaults standardUserDefaults] objectForKey:@"birthdate"],[[NSUserDefaults standardUserDefaults] objectForKey:@"height"],[[NSUserDefaults standardUserDefaults] objectForKey:@"weight"]);
-#warning // 下载用户所有plist文件到document中
+        // 下载用户所有plist文件到document中
         NSURL* url = [NSURL URLWithString:@"http://www.auv-studio.com/downloadPlist.php"];
         NSString* bodyStr = [NSString stringWithFormat:@"uuid=%@",[_wrapper objectForKey:(__bridge id)kSecValueData]];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:2.0f];
@@ -156,7 +172,27 @@
             
             NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSLog(@"downloadPlist&&&&&&&&&%@&&&&&&&&&", result);
+            // 提取所有plist文件名与文件内容到数组中
+            NSArray* resultArray = [result componentsSeparatedByString:@"--"];
+            NSMutableArray* mutableResultArray = [NSMutableArray arrayWithArray:resultArray];
+            // 去除空数组
+            for (NSString* item in resultArray) {
+                if ([item isEqualToString:@""]) {
+                    [mutableResultArray removeObject:item];
+                }
+            }
+            NSLog(@"%@",mutableResultArray);
+            // 将数组写入document中
+            for (int index = 0; index<[mutableResultArray count]; index++) {
+                if (index%2==0) {
+                    // 将数据写入document中
+                    NSData* data = [mutableResultArray[index+1] dataUsingEncoding:NSUTF8StringEncoding];
+                    NSString* plistFileName = [mutableResultArray[index] substringFromIndex:37];
+                    [data writeToFile:[self.documentPath stringByAppendingPathComponent:plistFileName] atomically:YES];
+                }
+            }
         }];
+        
     }else {
         
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunch"];
